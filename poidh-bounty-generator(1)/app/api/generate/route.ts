@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
 
     const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
     const response = await openai.responses.create({
-      model: 'gpt-5.6-luna',
+      model: process.env.OPENAI_MODEL || 'gpt-5',
       reasoning: { effort: 'low' },
       input: [
         { role: 'system', content: [{ type: 'input_text', text: `You generate excellent poidh.xyz bounties from Farcaster activity. A poidh bounty must be a concrete real-world or online challenge another person can complete and prove with a photo, video, public link, artifact, or other clear evidence. Never merely restate a user's cast. Infer recurring interests and turn them into a fun, specific, achievable challenge. Avoid dangerous, illegal, invasive, discriminatory, sexual, or financial-manipulation tasks. Include objective claim requirements. Return JSON only with keys: title, description, instructions (array of strings), whyItFits, interests (array of 3-6 short strings). The description must be publish-ready and include a concise Proof required section.` }] },
